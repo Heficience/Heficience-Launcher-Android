@@ -10,19 +10,19 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "com.hos_dvk.easyphone"
+        applicationId "com.heficience.androidlauncher"
         minSdkVersion 19
         targetSdkVersion 30
         versionCode 11
         versionName "0.1"
-        manifestPlaceholders = [hostName:"www.handy-open-source.org"]
+        manifestPlaceholders = [hostName:"www.heficience.com"]
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility "1.8"
+        targetCompatibility "1.8"
     }
 
     buildFeatures {
@@ -60,6 +60,11 @@ android {
 
         checkReleaseBuilds false
 
+    }
+    ndkVersion '23.1.7779620'
+    dependenciesInfo {
+        includeInApk true
+        includeInBundle true
     }
 }
 

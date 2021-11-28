@@ -1,4 +1,4 @@
-# **HOS_DVK Easy-Phone** #
+# **Heficience-Launcher-Android** #
 
 ![Image de l'application](miniature.png)
 
@@ -24,5 +24,5 @@ En effet, nous avons créé une application qui en présente que les fonctions d
 
 [![Watch the video](videoPreview.png)](https://youtu.be/5JRKCSUbZ9Y)
 
-Le code source est là : [Code Source](https://github.com/handyopensource/HOSDVK-EasyPhone)  
+Le code source est là : [Code Source](Heficience-Launcher-Android)
 L'appli est sous licence GPL : [LICENCE](LICENSE_GPL.md)

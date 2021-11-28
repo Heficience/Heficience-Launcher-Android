@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Easy-Phone</string>
+    <string name="app_name">Heficience-Android</string>
     <!-- MODULES -->
     <string name="module_dialer">APPEL</string>
     <string name="module_contacts">CONTACTS</string>
