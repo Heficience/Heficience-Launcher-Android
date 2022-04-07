@@ -14,45 +14,64 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    
-    <uses-feature android:name="android.hardware.camera"
+
+    <uses-feature
+        android:name="android.hardware.camera"
         android:required="true" />
+
+    <queries>
+        <intent>
+            <action android:name="android.media.action.IMAGE_CAPTURE" />
+        </intent>
+    </queries>
 
     <application
         android:allowBackup="true"
+        android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.HeficienceEasyPhone"
-        android:fullBackupContent="true">
-        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+        android:theme="@style/Theme.HeficienceEasyPhone">
         <activity
-            android:name="com.heficience.androidlauncher.MainActivity"
-            android:label="@string/app_name"
+            android:name=".module_activity.ImageActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="false"
+            android:label="@string/title_activity_image"
+            android:theme="@style/Theme.HeficienceEasyPhone.Fullscreen" />
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <activity
+            android:name=".MainActivity"
             android:exported="true"
+            android:label="@string/app_name"
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.HOME" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name="com.heficience.androidlauncher.module_activity.ContactActivity"/>
-        <activity android:name="com.heficience.androidlauncher.module_activity.DialerActivity"/>
-        <activity android:name="com.heficience.androidlauncher.module_activity.RealCallActivity"/>
-        <activity android:name="com.heficience.androidlauncher.module_activity.AddContactActivity"/>
-        <activity android:name="com.heficience.androidlauncher.module_activity.SmsListActivity"
+        <activity android:name=".module_activity.ContactActivity" />
+        <activity android:name=".module_activity.DialerActivity" />
+        <activity android:name=".module_activity.RealCallActivity" />
+        <activity android:name=".module_activity.AddContactActivity" />
+        <activity
+            android:name=".module_activity.SmsListActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
                 <action android:name="android.provider.Telephony.SMS_SENT" />
             </intent-filter>
         </activity>
-        <activity android:name="com.heficience.androidlauncher.module_activity.GalleryActivity"/>
-        <activity android:name="com.heficience.androidlauncher.module_activity.PhotoChoiceActivity">
-        </activity>
+        <activity android:name=".module_activity.GalleryActivity" />
+        <activity android:name=".module_activity.PhotoChoiceActivity"></activity>
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.heficience.androidlauncher.fileprovider"
@@ -61,49 +80,50 @@
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
-        </provider>
-        <!-- BroadcastReceiver that listens for incoming SMS messages -->
-        <receiver android:name="com.heficience.androidlauncher.widget.SmsReceiver"
-            android:permission="android.permission.BROADCAST_SMS"
+        </provider> <!-- BroadcastReceiver that listens for incoming SMS messages -->
+        <receiver
+            android:name=".widget.SmsReceiver"
             android:enabled="true"
-            android:exported="true">
+            android:exported="true"
+            android:permission="android.permission.BROADCAST_SMS">
             <intent-filter android:priority="1">
                 <action android:name="android.provider.Telephony.SMS_DELIVER" />
             </intent-filter>
-        </receiver>
-
-        <!-- BroadcastReceiver that listens for incoming MMS messages -->
-        <receiver android:name="com.heficience.androidlauncher.widget.MmsReceiver"
+        </receiver> <!-- BroadcastReceiver that listens for incoming MMS messages -->
+        <receiver
+            android:name=".widget.MmsReceiver"
             android:permission="android.permission.BROADCAST_WAP_PUSH">
             <intent-filter>
                 <action android:name="android.provider.Telephony.WAP_PUSH_DELIVER" />
+
                 <data android:mimeType="application/vnd.wap.mms-message" />
             </intent-filter>
-        </receiver>
-
-        <!-- Activity that allows the user to send new SMS/MMS messages -->
-        <activity android:name="com.heficience.androidlauncher.module_activity.SmsConversationActivity" >
+        </receiver> <!-- Activity that allows the user to send new SMS/MMS messages -->
+        <activity android:name=".module_activity.SmsConversationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
                 <action android:name="android.intent.action.SENDTO" />
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
                 <action android:name="android.provider.Telephony.SMS_SENT" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="sms" />
                 <data android:scheme="smsto" />
                 <data android:scheme="mms" />
                 <data android:scheme="mmsto" />
             </intent-filter>
-        </activity>
-
-        <!-- Service that delivers messages from the phone "quick response" -->
-        <service android:name="com.heficience.androidlauncher.module_activity.SmsConversationActivity"
-            android:permission="android.permission.SEND_RESPOND_VIA_MESSAGE"
-            android:exported="true" >
+        </activity> <!-- Service that delivers messages from the phone "quick response" -->
+        <service
+            android:name=".module_activity.SmsConversationActivity"
+            android:exported="true"
+            android:permission="android.permission.SEND_RESPOND_VIA_MESSAGE">
             <intent-filter>
                 <action android:name="android.intent.action.RESPOND_VIA_MESSAGE" />
+
                 <category android:name="android.intent.category.DEFAULT" />
+
                 <data android:scheme="sms" />
                 <data android:scheme="smsto" />
                 <data android:scheme="mms" />
@@ -111,9 +131,5 @@
             </intent-filter>
         </service>
     </application>
-    <queries>
-        <intent>
-            <action android:name="android.media.action.IMAGE_CAPTURE" />
-        </intent>
-    </queries>
+
 </manifest>

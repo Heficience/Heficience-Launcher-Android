@@ -26,13 +26,28 @@
         <item name="android:textStyle">bold</item>
         <item name="android:popupBackground">@drawable/abc_popup_background_mtrl_mult</item>
     </style>
+
     <style name="keyboard_style_look">
         <item name="android:textSize">@dimen/text_size</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:background">@drawable/keyboard_look</item>
     </style>
+
     <style name="my_stroke">
         <item name="android:background">@drawable/keyboard_look</item>
+    </style>
+
+    <style name="Theme.HeficienceEasyPhone.Fullscreen" parent="Theme.HeficienceEasyPhone">
+        <item name="android:actionBarStyle">
+            @style/Widget.Theme.HeficienceEasyPhone.ActionBar.Fullscreen
+        </item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowBackground">@null</item>
+    </style>
+
+    <style name="ThemeOverlay.HeficienceEasyPhone.FullscreenContainer" parent="">
+        <item name="fullscreenBackgroundColor">@color/light_blue_600</item>
+        <item name="fullscreenTextColor">@color/light_blue_A200</item>
     </style>
 </resources>

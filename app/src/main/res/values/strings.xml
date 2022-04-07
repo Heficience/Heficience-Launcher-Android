@@ -65,4 +65,8 @@
     <string name="refuse_contact_write">Vous avec refusé l\'accès à l\'écriture.</string>
     <string name="accept_permission">Bienvenue sur l\'application</string>
     <string name="refuse_permission">Relancer l\'application, vous avez refusé les permissions</string>
+    <string name="title_activity_image">ImageActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="back">Retour</string>
 </resources>

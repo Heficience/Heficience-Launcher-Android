@@ -52,6 +52,7 @@
         android:id="@+id/i_choice_camera"
         android:layout_width="match_parent"
         android:layout_height="300dp"
+        android:layout_margin="5dp"
         android:autoSizeTextType="uniform"
         android:maxLines="2"
         android:onClick="chooseCamera"
@@ -76,6 +77,7 @@
         android:id="@+id/i_choice_gallery"
         android:layout_width="match_parent"
         android:layout_height="300dp"
+        android:layout_margin="5dp"
         android:autoSizeTextType="uniform"
         android:maxLines="2"
         android:onClick="chooseGallery"
@@ -89,18 +91,8 @@
         app:iconGravity="top"
         app:iconSize="80sp"
         app:iconTint="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/imageView3"
         app:layout_constraintTop_toBottomOf="@+id/i_choice_camera"
-        app:layout_constraintVertical_bias="0.568"
         app:tint="@color/white"
-        tools:layout_editor_absoluteX="0dp" />
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        tools:layout_editor_absoluteX="5dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
