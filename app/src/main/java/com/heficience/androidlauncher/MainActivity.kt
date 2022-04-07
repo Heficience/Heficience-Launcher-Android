@@ -1,6 +1,8 @@
 package com.heficience.androidlauncher
 
 import android.Manifest
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.role.RoleManager
@@ -10,9 +12,12 @@ import android.content.pm.PackageManager
 import android.media.AudioAttributes
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.provider.Settings
 import android.provider.Telephony
 import android.view.View
+import android.widget.ImageView
+import android.widget.TextClock
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -21,9 +26,6 @@ import com.heficience.androidlauncher.module_activity.ContactActivity
 import com.heficience.androidlauncher.module_activity.DialerActivity
 import com.heficience.androidlauncher.module_activity.PhotoChoiceActivity
 import com.heficience.androidlauncher.module_activity.SmsListActivity
-
-
-
 
 
 //--------------------MainActivity-------------------------
@@ -66,7 +68,8 @@ class MainActivity : AppCompatActivity() {
         val checkValWriteExternalStorage =
             checkSelfPermission(requestWriteExternalStoragePermission)
         val checkValWakeLock = checkSelfPermission(requestWakeLockPermission)
-        val checkValReceiveBootCompleted = checkSelfPermission(requestReceiveBootCompletedPermission)
+        val checkValReceiveBootCompleted =
+            checkSelfPermission(requestReceiveBootCompletedPermission)
         if (checkValReadContact == PackageManager.PERMISSION_GRANTED &&
             checkValWriteContact == PackageManager.PERMISSION_GRANTED &&
             checkValReadSms == PackageManager.PERMISSION_GRANTED &&
@@ -114,6 +117,47 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+        val textClock = findViewById<View>(R.id.clock) as TextClock
+
+        textClock.format12Hour = null; // pour un affichage 24h
+
+
+        Handler().postDelayed({
+            toggleClock(null)
+        }, 2000)
+
+    }
+
+    fun toggleClock(@Suppress("UNUSED_PARAMETER") view: View?) {
+        val logo = findViewById<View>(R.id.logo) as ImageView
+        val textClock = findViewById<View>(R.id.clock) as TextClock
+
+        var new: View? = null
+        var old: View? = null
+        if (logo.visibility == View.VISIBLE && textClock.visibility == View.GONE) {
+            old = logo
+            new = textClock
+        } else {
+            old = textClock
+            new = logo
+        }
+
+        old.animate()
+            .translationY(0F)
+            .alpha(0.0f)
+            .setListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+                    super.onAnimationEnd(animation)
+                    old.visibility = View.GONE
+
+                    new.alpha = 0.0f;
+                    new.visibility = View.VISIBLE
+                    new.animate()
+                        .translationY(0F)
+                        .alpha(1.0f)
+                        .setListener(null);
+                }
+            })
     }
 
     private fun createNotificationChannel() {
@@ -224,7 +268,7 @@ class MainActivity : AppCompatActivity() {
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
-        grantResults: IntArray
+        grantResults: IntArray,
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
@@ -242,6 +286,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
     override fun onBackPressed() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
